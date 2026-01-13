@@ -15,7 +15,7 @@ const categoryRoute = require('./routes/category.route')
 const app =express()
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:[ "http://localhost:3000","https://www.thegiftcore.in/"],
     credentials: true, // this is required for the cookie and so does the origin of the specific url to set a cookie in
   })
 );

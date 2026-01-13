@@ -1,4 +1,4 @@
-const Category = require('../model/Category.schema');
+const Category = require('../model/category.schema');
 const { uploadImage } = require('../services/cloud.service');
 
 // Get all categories   
