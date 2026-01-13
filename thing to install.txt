@@ -1,0 +1,21 @@
+i > 
+express
+moongoose
+,jwt
+cookie-parser
+imagekit for cloud storage
+
+
+n > bcrypt,cors,,express validator
+
+                || Done
+// try and apply the imagekit << done 
+
+                || Yet To be Done
+// remember we have to add multiple images in the array << pending
+// Express Validatore must be installed
+notes `` Points
+// look into the pre and virtual mongoose thing 
+
+
+// configure problem was with the syntax you are fine,
