@@ -85,7 +85,26 @@ const logout = async (req, res) => {
             msg: "err occured",
             error: error
         })
+    } 
+}
+
+const getMe = async (req, res)=>{
+    try{
+        console.log('request reached')
+        console.log('this is the user:',req.user)
+        return res.status(200).json('authentication successful')
+    }catch(error){
+        return res.status(500).json({msg:'server error', error: error.message})
     }
 }
 
-module.exports = { createUser, login, logout }
+const getUser = async (req,res)=>{
+    try{
+        console.log('user request reached here')
+        return res.status(200).json({user:req.user})
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json({msg:'server error', error: error.message})
+    }
+}
+module.exports = { createUser, login, logout, getMe , getUser }

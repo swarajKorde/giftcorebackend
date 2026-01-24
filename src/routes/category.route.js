@@ -14,6 +14,6 @@ router.get('/', getAllCategories);
 router.get('/:id',getCategoryById);
 router.post('/', adminCheck,upload.array('image',3),createCategory);
 router.put('/:id',authCheck, updateCategory);
-router.delete('/:id',authCheck, deleteCategory); //
+router.delete('/:id',adminCheck, deleteCategory); //
 
 module.exports=router;   

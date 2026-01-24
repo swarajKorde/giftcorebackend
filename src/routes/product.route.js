@@ -12,7 +12,7 @@ const {adminCheck}=require('../middleware/adminCheck.js')
 router.get('/', getAllProducts);
 router.get('/:id',getProductById);
 router.post('/', adminCheck,upload.array('image',3),createProduct);
-router.put('/:id',authCheck,upload.array('image',3), updateProduct);
+router.put('/:id',adminCheck,upload.array('image',3), updateProduct);
 router.delete('/:id',authCheck, deleteProduct); 
 
-module.exports = router;    
+module.exports = router;     

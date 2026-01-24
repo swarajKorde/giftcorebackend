@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const adminCheck = async (req, res, next) => {
     const token = req.cookies.token;
     try {
-        console.log(token)
+        
         if (!token) {
             return res.status(401).json({ message: "No token, authorization denied" });
         }
@@ -15,7 +15,7 @@ const adminCheck = async (req, res, next) => {
             return res.status(401).json({msg:'you aint no admin sorry'})
         }
         req.user = decoded;
-        console.log("Authenticated User:", req.user);
+        // console.log("Authenticated User:", req.user);
         next()
     } catch (error) {
         console.error(error.message); 

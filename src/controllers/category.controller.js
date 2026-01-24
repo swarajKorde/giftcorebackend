@@ -1,11 +1,11 @@
 const Category = require('../model/category.Schema');
-const { uploadImage } = require('../services/cloud.service');
+const { uploadImage,deleteImagesFromCloud } = require('../services/cloud.service');
 
 // Get all categories   
 exports.getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find().populate('image');
-        console.log(categories)   
+        // console.log(categories)   
         res.status(200).json(categories);
     }
     catch (error) {
@@ -14,7 +14,7 @@ exports.getAllCategories = async (req, res) => {
 }; 
 
 // Create a new Category   
-exports.createCategory = async (req, res) => { 
+exports.createCategory = async (req, res) => {  
     try {
         // console.log(req.body)
         const { name, description, } = req.body;
@@ -40,7 +40,7 @@ exports.updateCategory = async (req, res) => {
             { _id }, {
             $set: {
                 ...req.body,    
-                updatedBy: req.user.id,
+                updatedBy: req.user.id, 
             },  
             $push: {
                 
@@ -80,14 +80,34 @@ exports.getCategoryById = async (req, res) => {
 }; 
 // Delete a Category
 exports.deleteCategory = async (req, res) => {
+  try {
     const { id } = req.params;
-    try {
-        const deletedCategory = await Category.findOneAndDelete({ _id: id });   
-        if (!deletedCategory) {
-            return res.status(404).json({ message: 'Category not found' });
-        }
-        res.status(200).json({ message: 'Category deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Server Error', error: error.message });
-    }   
+
+    // 1️⃣ Find category + populate images
+    const category = await Category.findById(id).populate('image');
+
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+
+    // 2️⃣ Collect ImageKit fileIds
+    const fileIds = category.image.map(img => img.fileId);
+
+    // 3️⃣ Delete images from ImageKit + Image collection
+    if (fileIds.length > 0) {
+      await deleteImagesFromCloud(fileIds);
+    }
+
+    // 4️⃣ Remove category reference from products (KEEP PRODUCTS)
+    
+
+    // 5️⃣ Delete category
+    await Category.findByIdAndDelete(id);
+
+    res.status(200).json({ message: 'Category deleted successfully' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
 };

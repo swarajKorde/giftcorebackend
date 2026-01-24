@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const authCheck = async (req, res, next) => {
     const token = req.cookies.token;
     try {
-        console.log(token)
+        console.log('token from authcheck',token)
         if (!token) {
             return res.status(401).json({ message: "No token, authorization denied" });
         }
@@ -21,8 +21,8 @@ const authCheck = async (req, res, next) => {
     }
 
 
-}
+} 
 
-module.exports = {
+module.exports = { 
     authCheck
 }
