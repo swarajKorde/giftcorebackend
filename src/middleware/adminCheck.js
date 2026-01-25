@@ -18,7 +18,7 @@ const adminCheck = async (req, res, next) => {
         // console.log("Authenticated User:", req.user);
         next()
     } catch (error) {
-        console.error(error.message); 
+        console.error(error.message);  
         return res.status(500).json({ message: "Server Error", error: error.message });
     }
 
