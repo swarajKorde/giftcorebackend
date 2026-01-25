@@ -90,7 +90,7 @@ const logout = async (req, res) => {
 
 const getMe = async (req, res)=>{
     try{
-        console.log('request reached')
+        console.log('request reached in admin controller')
         console.log('this is the user:',req.user)
         return res.status(200).json('authentication successful')
     }catch(error){
@@ -100,7 +100,7 @@ const getMe = async (req, res)=>{
 
 const getUser = async (req,res)=>{
     try{
-        console.log('user request reached here')
+        console.log('user request reached here ')
         return res.status(200).json({user:req.user})
     }catch(error){
         console.log(error.message)
