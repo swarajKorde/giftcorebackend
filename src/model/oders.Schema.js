@@ -8,6 +8,7 @@ const oderSchema = new mongoose.Schema({
     // }], // we are not selling the products individually but as hampers >> but if we do then uncomment this
     product:{
         type:mongoose.Schema.Types.ObjectId,
+        ref:'Product'
         
        
     },

@@ -19,3 +19,28 @@ notes `` Points
 
 
 // configure problem was with the syntax you are fine,
+
+
+image file [
+  {
+    fieldname: 'image',
+    originalname: 'download.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    buffer: <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 07 
+80 00 00 03 70 08 06 00 00 00 ce 7f 77 cc 00 00 00 01 73 52 47 42 00 ae ce 1c e9 00 00 20 00 ... 69081 more bytes>,
+    size: 69131
+  }
+]
+[Object: null prototype] {
+  name: 'test category 21',
+  description: 'this is test category',
+  hampers: [
+    '69609da384ebea1eb7138096',
+    '697485531552c023f9bcaf45',
+    '696259ea79c6a3275ed67e7b',
+    '69625eb749f4be6df6f4bbd1',
+    '69706659d50007b0d437f455'
+  ],
+  imagesToRemove: '69762c1a5c7cd75eb85e8611'
+}

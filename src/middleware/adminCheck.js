@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const adminCheck = async (req, res, next) => {
     const token = req.cookies.token;
     
-    console.log('this is req from admin check',req)
-    console.log('this is token from admin check ',token)
+    // console.log('this is req from admin check',req)
+    // console.log('this is token from admin check ',token)
     
     try {
         

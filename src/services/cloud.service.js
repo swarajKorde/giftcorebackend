@@ -19,13 +19,13 @@ const uploadImage = async (files) => {
       const upload = await Imagekit.upload({
         file: file.buffer,
         fileName: file.originalname,
-      }); 
+      });
       // uploading those images in mongodb
       const image = await Image.create({
-          name:upload.name,
-          url:upload.url,
-          fileId:upload.fileId,
-      });
+        name: upload.name,
+        url: upload.url,
+        fileId: upload.fileId,
+      }); 
       imagesIds.push(image._id);
     }
 
@@ -36,18 +36,46 @@ const uploadImage = async (files) => {
   }
 };
 
-const deleteImagesFromCloud = async (fileIds) => {
-  try {
-    for (const fileId of fileIds) { 
-      await Imagekit.deleteFile(fileId); 
-      // Also remove from MongoDB
+const deleteImagesFromCloud = async (fileIds = []) => {
+  for (const fileId of fileIds) {
+    try {
+      await new Promise((resolve, reject) => {
+        Imagekit.deleteFile(fileId, (error, result) => {
+          if (error) return reject(error);
+          console.log("ImageKit delete result:", result);
+          resolve(result);
+        });
+      });
+
+      // delete from MongoDB ONLY after cloud delete
       await Image.findOneAndDelete({ fileId });
-    } 
-  } catch (error) {
-    console.error('Error deleting image from ImageKit:', error.massage);
-    throw error;
+
+    } catch (error) {
+      console.error(
+        "Error deleting image from ImageKit:",
+        error.message || error
+      );
+      throw error;
+    }
   }
-}
+};
+
+// const deleteImagesFromCloud = async (fileIds) => {
+//   try { 
+//     for (const fileId of fileIds) {
+//       await Imagekit.deleteFile(fileId, (error, result) => {
+//         console.log('image kit delete result', result)
+//         if (error) return reject(error);
+//         resolve(result);
+//       });
+//       // Also remove from MongoDB
+//       await Image.findOneAndDelete({ fileId });
+//     }
+//   } catch (error) {
+//     console.error('Error deleting image from ImageKit:', error.message);
+//     throw error;
+//   }
+// }
 
 console.log(exports.uploadImage);
 module.exports = { uploadImage, deleteImagesFromCloud };

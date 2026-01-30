@@ -7,6 +7,7 @@ const authRoute = require('./routes/auth.route')
 const productRoute = require('./routes/product.route')
 const hamperRoute = require('./routes/hamper.route')
 const categoryRoute = require('./routes/category.route')
+const cartRoute = require('./routes/cart.route')
 // const dotenv =require('dotenv')
 // dotenv.config()  ==> even this works 
 
@@ -21,9 +22,11 @@ app.use(
 );
 app.use(cookie())
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 // routers
 app.use('/api/product',productRoute);
+app.use('/api/cart',cartRoute)
 app.use('/api/hamper',hamperRoute);
 app.use('/api/auth',authRoute);
 app.use('/api/category',categoryRoute)

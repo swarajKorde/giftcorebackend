@@ -15,7 +15,7 @@ const login = async (req, res) => {
     const payload = {
         id: user._id,
         email: user.email,
-        role: user.role
+        role: user.role 
     }
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '7d'
@@ -84,7 +84,7 @@ const logout = async (req, res) => {
         return res.status(400).json({
             msg: "err occured",
             error: error
-        })
+        }) 
     } 
 }
 

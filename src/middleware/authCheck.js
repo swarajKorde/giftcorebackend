@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const authCheck = async (req, res, next) => {
     const token = req.cookies.token;
     try {
-        console.log('token from authcheck',token)
+        // console.log('token from authcheck',token)
         if (!token) {
             return res.status(401).json({ message: "No token, authorization denied" });
         }
